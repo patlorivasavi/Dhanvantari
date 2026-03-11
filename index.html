@@ -1,0 +1,526 @@
+<!-- frontend/index.html -->
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhanvantari - TriAura</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+
+
+
+</head>
+
+<body class="h-full bg-gradient-to-br from-violet-50 via-cyan-50 to-fuchsia-50 animate-gradient overflow-auto">
+    <div id="app-container" class="min-h-full w-full">
+        <div id="toast-container"></div>
+        <!-- Article Detail Modal -->
+        <div id="article-modal" class="section-hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-auto">
+            <div class="premium-card rounded-3xl max-w-2xl w-full my-8 animate-slide">
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h2 id="modal-title" class="font-display text-3xl font-bold text-gray-900"></h2><button onclick="closeArticleModal()" class="text-gray-400 hover:text-gray-600 text-3xl">×</button>
+                </div>
+                <div class="p-8">
+                    <div id="modal-content" class="text-gray-700 leading-relaxed space-y-4"></div><button onclick="closeArticleModal()" class="mt-6 px-6 py-3 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-lg transition">Close</button>
+                </div>
+            </div>
+        </div>
+        <!-- Landing Page -->
+        <section id="landing-page" class="section-visible min-h-full w-full flex flex-col">
+            <nav class="w-full px-6 py-4 flex items-center justify-between glass-card sticky top-0 z-50">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center animate-pulse3d"><span class="text-2xl">🌿</span>
+                    </div>
+                    <div>
+                        <h1 id="nav-title" class="font-display text-xl font-bold bg-gradient-to-r from-violet-700 to-cyan-600 bg-clip-text text-transparent">Dhanvantari</h1>
+                        <div id="nav-company" class="text-xs text-gray-500">
+                            by TriAura
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#" class="nav-item text-gray-600 hover:text-violet-600 font-medium" onclick="event.preventDefault(); showSection('landing-page')">Home</a>
+                    <a href="#" class="nav-item text-gray-600 hover:text-violet-600 font-medium" onclick="event.preventDefault(); showSection('features-section')">Features</a>
+                    <a href="#" class="nav-item text-gray-600 hover:text-violet-600 font-medium" onclick="event.preventDefault(); showSection('knowledge-hub')">Knowledge</a>
+
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="showSection('login-page')" class="px-5 py-2 text-violet-600 font-semibold hover:text-violet-700 transition">Login</button> <button onclick="showSection('register-page')" class="btn-3d px-6 py-2 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold rounded-xl">Get Started</button>
+                </div>
+            </nav>
+            <div class="flex-1 flex items-center justify-center px-6 py-12">
+                <div class="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
+                    <div class="animate-slide">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 rounded-full mb-6"><span class="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></span><span class="text-violet-700 font-medium text-sm">AI-Powered Nutrition</span>
+                        </div>
+                        <h1 id="hero-title" class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">Your Personal<br><span class="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Nutrition Guide</span></h1>
+                        <p id="hero-tagline" class="text-xl text-gray-600 mb-8 leading-relaxed">Transform your health journey with personalized diet plans, cultural recommendations, and gamified wellness tracking.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="showSection('register-page')" class="btn-3d px-8 py-4 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold rounded-2xl text-lg flex items-center gap-2">Start Free Trial <span class="text-2xl">→</span></button>                            <button onclick="event.preventDefault(); showSection('features-section')" class="px-8 py-4 bg-white text-gray-700 font-semibold rounded-2xl border-2 border-gray-200 hover:border-violet-300 transition flex items-center gap-2">Explore Features <span>✨</span></button>
+                        </div>
+                        <div class="flex items-center gap-6 mt-8">
+                            <div class="flex -space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 border-2 border-white flex items-center justify-center text-white text-sm">
+                                    A
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 border-2 border-white flex items-center justify-center text-white text-sm">
+                                    B
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 border-2 border-white flex items-center justify-center text-white text-sm">
+                                    C
+                                </div>
+                            </div>
+                            <p class="text-gray-600"><span class="font-bold text-gray-900">10,000+</span> healthy users</p>
+                        </div>
+                    </div>
+                    <div class="relative animate-float">
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-400/30 to-cyan-400/30 rounded-3xl blur-3xl"></div>
+                        <div class="relative premium-card rounded-3xl p-8">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gradient-to-br from-violet-100 to-violet-50 rounded-2xl p-4 text-center"><span class="text-4xl mb-2 block emoji-float">🥗</span>
+                                    <p class="font-semibold text-violet-800">Diet Plans</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-2xl p-4 text-center"><span class="text-4xl mb-2 block emoji-float" style="animation-delay: 0.5s">💪</span>
+                                    <p class="font-semibold text-cyan-800">Exercise</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-fuchsia-100 to-fuchsia-50 rounded-2xl p-4 text-center"><span class="text-4xl mb-2 block emoji-float" style="animation-delay: 1s">🧠</span>
+                                    <p class="font-semibold text-fuchsia-800">Mind &amp; Body</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-amber-100 to-amber-50 rounded-2xl p-4 text-center"><span class="text-4xl mb-2 block emoji-float" style="animation-delay: 1.5s">📊</span>
+                                    <p class="font-semibold text-amber-800">Tracking</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-4 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-xl text-white">
+                                <p class="text-sm opacity-90">Today's Tip</p>
+                                <p class="font-semibold" id="daily-tip">Drink warm water with lemon to boost metabolism!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Features Section -->
+        <section id="features-section" class="section-hidden min-h-full w-full px-6 py-12">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 animate-slide">
+                    <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+                    <p class="text-xl text-gray-600">Everything you need for a healthier lifestyle</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="premium-card rounded-2xl p-6 animate-slide" style="animation-delay: 0.1s">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-violet-600 flex items-center justify-center mb-4"><span class="text-2xl">🧮</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-900 mb-2">BMI Calculator</h3>
+                        <p class="text-gray-600">Smart health status detection with personalized recommendations</p>
+                    </div>
+                    <div class="premium-card rounded-2xl p-6 animate-slide" style="animation-delay: 0.2s">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center mb-4"><span class="text-2xl">🏃</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-900 mb-2">Exercise Engine</h3>
+                        <p class="text-gray-600">Smart recommendations based on your fitness level and goals</p>
+                    </div>
+                    <div class="premium-card rounded-2xl p-6 animate-slide" style="animation-delay: 0.3s">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 flex items-center justify-center mb-4"><span class="text-2xl">🍛</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-900 mb-2">Cultural Diets</h3>
+                        <p class="text-gray-600">Traditional diet plans honoring your cultural preferences</p>
+                    </div>
+                    <div class="premium-card rounded-2xl p-6 animate-slide" style="animation-delay: 0.4s">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center mb-4"><span class="text-2xl">🎮</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-900 mb-2">Gamification</h3>
+                        <p class="text-gray-600">Earn points, badges, and track your progress with fun challenges</p>
+                    </div>
+                    <div class="premium-card rounded-2xl p-6 animate-slide" style="animation-delay: 0.5s">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mb-4"><span class="text-2xl">🧘</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-900 mb-2">Mood-Based</h3>
+                        <p class="text-gray-600">Get nutrition suggestions based on your current emotional state</p>
+                    </div>
+                    <div class="premium-card rounded-2xl p-6 animate-slide" style="animation-delay: 0.6s">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 flex items-center justify-center mb-4"><span class="text-2xl">❓</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-900 mb-2">MythBuster</h3>
+                        <p class="text-gray-600">Interactive quiz to bust nutrition myths with scientific facts</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12"><button onclick="event.preventDefault(); showSection('landing-page')" class="px-6 py-3 text-violet-600 font-semibold hover:text-violet-700">← Back to Home</button>
+                </div>
+            </div>
+        </section>
+        <!-- Register Page -->
+        <section id="register-page" class="section-hidden min-h-full w-full flex items-center justify-center px-6 py-12">
+            <div class="max-w-md w-full">
+                <div class="premium-card rounded-3xl p-8 animate-slide">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 animate-pulse3d"><span class="text-3xl">🌿</span>
+                        </div>
+                        <h2 class="font-display text-3xl font-bold text-gray-900">Join Dhanvantari</h2>
+                        <p class="text-gray-600 mt-2">Start your wellness journey today</p>
+                    </div>
+                    <form id="register-form" onsubmit="handleRegister(event)">
+                        <div class="space-y-4">
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-username">Username</label><input type="text" id="reg-username" required class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                    placeholder="Choose a username">
+                            </div>
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-email">Email</label><input type="email" id="reg-email" required class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                    placeholder="your@email.com">
+                            </div>
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-password">Password</label><input type="password" id="reg-password" required minlength="6" class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                    placeholder="Min 6 characters">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-age">Age</label><input type="number" id="reg-age" required min="10" max="120" class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                        placeholder="25">
+                                </div>
+                                <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-gender">Gender</label><select id="reg-gender" required class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"><option value="">Select</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-weight">Weight (kg)</label><input type="number" id="reg-weight" required min="20" max="300" class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                        placeholder="70">
+                                </div>
+                                <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="reg-height">Height (cm)</label><input type="number" id="reg-height" required min="100" max="250" class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                        placeholder="170">
+                                </div>
+                            </div><button type="submit" id="register-btn" class="btn-3d w-full py-4 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold rounded-xl text-lg">Create Account</button>
+                        </div>
+                    </form>
+                    <p class="text-center mt-6 text-gray-600">Already have an account? <a href="#" onclick="event.preventDefault(); showSection('login-page')" class="text-violet-600 font-semibold hover:text-violet-700">Login</a></p>
+                </div>
+            </div>
+        </section>
+        <!-- Login Page -->
+        <section id="login-page" class="section-hidden min-h-full w-full flex items-center justify-center px-6 py-12">
+            <div class="max-w-md w-full">
+                <div class="premium-card rounded-3xl p-8 animate-slide">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center mb-4 animate-pulse3d"><span class="text-3xl">👋</span>
+                        </div>
+                        <h2 class="font-display text-3xl font-bold text-gray-900">Welcome Back</h2>
+                        <p class="text-gray-600 mt-2">Continue your wellness journey</p>
+                    </div>
+                    <form id="login-form" onsubmit="handleLogin(event)">
+                        <div class="space-y-4">
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="login-email">Email</label><input type="email" id="login-email" required class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                    placeholder="your@email.com">
+                            </div>
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2" for="login-password">Password</label><input type="password" id="login-password" required class="input-3d w-full px-4 py-3 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                    placeholder="Enter password">
+                            </div><button type="submit" id="login-btn" class="btn-3d w-full py-4 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold rounded-xl text-lg">Login</button>
+                        </div>
+                    </form>
+                    <p class="text-center mt-6 text-gray-600">New here? <a href="#" onclick="event.preventDefault(); showSection('register-page')" class="text-violet-600 font-semibold hover:text-violet-700">Create Account</a></p>
+                </div>
+            </div>
+        </section>
+        <!-- Dashboard -->
+        <section id="dashboard" class="section-hidden min-h-full w-full bg-gray-50">
+            <nav class="w-full px-8 py-5 glass-card sticky top-0 z-50 border-b border-white/20">
+                <div class="max-w-7xl mx-auto flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center"><span class="text-2xl">🌿</span>
+                        </div><span class="font-display text-2xl font-bold text-gray-900">Dhanvantari</span>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="hidden md:flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-amber-100 to-amber-50 rounded-full border border-amber-200"><span class="text-2xl">🏆</span><span id="user-points" class="font-bold text-amber-700 text-lg">0 pts</span>
+                        </div>
+                        <div id="user-avatar" class="w-11 h-11 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
+                            U
+                        </div><button onclick="handleLogout()" class="px-6 py-2 text-gray-600 hover:text-gray-900 font-medium transition">Logout</button>
+                    </div>
+                </div>
+            </nav>
+            <div class="max-w-7xl mx-auto px-8 py-12">
+                <!-- Welcome Banner -->
+                <div class="premium-card rounded-3xl p-8 mb-10 animate-slide">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                        <div>
+                            <h1 class="font-display text-4xl font-bold text-gray-900 mb-2">Welcome back, <span id="dash-username">User</span> 👋</h1>
+                            <p class="text-gray-600 text-lg" id="daily-tip-dash">Stay hydrated throughout the day for optimal health.</p>
+                        </div>
+                        <div class="flex items-center gap-12">
+                            <div class="text-center">
+                                <p class="text-4xl font-bold text-violet-600" id="dash-streak">0</p>
+                                <p class="text-sm text-gray-500 font-medium">Day Streak</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-4xl font-bold text-cyan-600" id="dash-quizzes">0</p>
+                                <p class="text-sm text-gray-500 font-medium">Quizzes Done</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Quick Actions Grid -->
+                <div class="grid md:grid-cols-4 gap-6 mb-10">
+                    <button onclick="showDashSection('bmi-section')" class="premium-card rounded-2xl p-5 text-left hover:scale-105 transition-transform"><span class="text-3xl mb-3 block">🧮</span><h3 class="font-bold text-gray-900">BMI Calculator</h3><p class="text-sm text-gray-500">Check your health status</p></button>                    <button onclick="showDashSection('quiz-section')" class="premium-card rounded-2xl p-5 text-left hover:scale-105 transition-transform"><span class="text-3xl mb-3 block">❓</span><h3 class="font-bold text-gray-900">MythBuster</h3><p class="text-sm text-gray-500">Test your knowledge</p></button>                    <button onclick="showDashSection('mood-section')" class="premium-card rounded-2xl p-5 text-left hover:scale-105 transition-transform"><span class="text-3xl mb-3 block">😊</span><h3 class="font-bold text-gray-900">Mood Check</h3><p class="text-sm text-gray-500">Get mood-based tips</p></button>                    <button onclick="showDashSection('diet-section')" class="premium-card rounded-2xl p-5 text-left hover:scale-105 transition-transform"><span class="text-3xl mb-3 block">🍽️</span><h3 class="font-bold text-gray-900">Diet Plan</h3><p class="text-sm text-gray-500">Personalized meals</p></button>
+                </div>
+                <!-- Dashboard Sections -->
+                <div id="dash-sections">
+                    <!-- BMI Section -->
+                    <div id="bmi-section" class="premium-card rounded-3xl p-8 mb-8 animate-slide">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="font-display text-3xl font-bold text-gray-900">🧮 BMI Calculator</h2><button onclick="event.preventDefault(); closeDashSection('bmi-section')" class="text-gray-400 hover:text-gray-600 text-3xl">×</button>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-12">
+                            <div>
+                                <div class="space-y-5">
+                                    <div class="grid grid-cols-2 gap-6">
+                                        <div><label class="block text-sm font-semibold text-gray-700 mb-3">Weight (kg)</label><input type="number" id="bmi-weight" class="input-3d w-full px-5 py-4 rounded-xl text-lg" placeholder="70">
+                                        </div>
+                                        <div><label class="block text-sm font-semibold text-gray-700 mb-3">Height (cm)</label><input type="number" id="bmi-height" class="input-3d w-full px-5 py-4 rounded-xl text-lg" placeholder="170">
+                                        </div>
+                                    </div><button type="button" onclick="calculateBMI()" class="btn-3d w-full py-4 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold rounded-xl text-lg">Calculate BMI</button>
+                                </div>
+                            </div>
+                            <div id="bmi-result" class="flex flex-col items-center justify-center">
+                                <div class="relative w-48 h-48">
+                                    <svg class="w-full h-full progress-ring" viewbox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="#e5e7eb" stroke-width="8" /><circle id="bmi-circle" cx="60" cy="60" r="54" fill="none" stroke="url(#bmiGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="339.292" stroke-dashoffset="339.292" /><defs>
+            <lineargradient id="bmiGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+             <stop offset="0%" stop-color="#8b5cf6" />
+             <stop offset="100%" stop-color="#06b6d4" />
+            </lineargradient>
+           </defs>
+          </svg>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center"><span id="bmi-value" class="text-4xl font-bold text-gray-900">--</span><span id="bmi-label" class="text-sm text-gray-500 font-medium">BMI</span>
+                                    </div>
+                                </div>
+                                <p id="bmi-status" class="mt-6 font-semibold text-gray-700 text-lg">Enter your details</p>
+                            </div>
+                        </div>
+                        <div id="exercise-recommendations" class="mt-8 hidden">
+                            <h3 class="font-bold text-xl text-gray-900 mb-6">💪 Recommended Exercises</h3>
+                            <div id="exercise-list" class="grid md:grid-cols-3 gap-6"></div>
+                        </div>
+                    </div>
+                    <!-- Quiz Section -->
+                    <div id="quiz-section" class="section-hidden premium-card rounded-3xl p-6 mb-6 animate-slide">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-display text-2xl font-bold text-gray-900">❓ MythBuster Quiz</h2><button onclick="event.preventDefault(); closeDashSection('quiz-section')" class="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+                        </div>
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2"><span class="text-sm font-medium text-gray-600">Question <span id="quiz-current">1</span> of <span id="quiz-total">10</span></span><span id="quiz-score-display" class="text-sm font-bold text-violet-600">Score: 0</span>
+                            </div>
+                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div id="quiz-progress" class="h-full bg-gradient-to-r from-violet-600 to-cyan-500 rounded-full transition-all duration-500" style="width: 10%"></div>
+                            </div>
+                        </div>
+                        <div id="quiz-container">
+                            <div class="text-center mb-8"><span id="quiz-myth-label" class="inline-block px-4 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-4">MYTH or FACT?</span>
+                                <h3 id="quiz-question" class="font-display text-xl md:text-2xl text-gray-900">Loading question...</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 max-w-md mx-auto"><button type="button" onclick="answerQuiz(true)" class="quiz-option btn-3d py-4 bg-emerald-500 text-white font-bold rounded-xl text-lg">✓ TRUE</button><button type="button" onclick="answerQuiz(false)" class="quiz-option btn-3d py-4 bg-red-500 text-white font-bold rounded-xl text-lg">✗ FALSE</button>
+                            </div>
+                            <div id="quiz-explanation" class="mt-6 p-4 rounded-xl hidden">
+                                <p id="quiz-explanation-text" class="text-gray-700"></p>
+                            </div>
+                        </div>
+                        <div id="quiz-complete" class="hidden text-center">
+                            <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center animate-pulse3d"><span class="text-5xl">🎉</span>
+                            </div>
+                            <h3 class="font-display text-3xl font-bold text-gray-900 mb-2">Quiz Complete!</h3>
+                            <p class="text-xl text-gray-600 mb-4">Your Score: <span id="final-score" class="font-bold text-violet-600">0/10</span></p>
+                            <p id="final-accuracy" class="text-gray-500 mb-6">Accuracy: 0%</p><button type="button" onclick="restartQuiz()" class="btn-3d px-8 py-3 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold rounded-xl">Play Again</button>
+                        </div>
+                    </div>
+                    <!-- Mood Section -->
+                    <div id="mood-section" class="section-hidden premium-card rounded-3xl p-6 mb-6 animate-slide">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-display text-2xl font-bold text-gray-900">😊 How are you feeling?</h2><button onclick="event.preventDefault(); closeDashSection('mood-section')" class="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+                        </div>
+                        <div id="mood-selector" class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                            <button type="button" onclick="selectMood('happy')" class="mood-card premium-card rounded-2xl p-4 text-center"><span class="text-4xl block mb-2">😊</span><span class="font-semibold text-gray-700">Happy</span></button>
+                            <button type="button" onclick="selectMood('stressed')" class="mood-card premium-card rounded-2xl p-4 text-center"><span class="text-4xl block mb-2">😰</span><span class="font-semibold text-gray-700">Stressed</span></button>                            <button type="button" onclick="selectMood('tired')" class="mood-card premium-card rounded-2xl p-4 text-center"><span class="text-4xl block mb-2">😴</span><span class="font-semibold text-gray-700">Tired</span></button>
+                            <button type="button" onclick="selectMood('anxious')" class="mood-card premium-card rounded-2xl p-4 text-center"><span class="text-4xl block mb-2">😟</span><span class="font-semibold text-gray-700">Anxious</span></button>
+                            <button type="button" onclick="selectMood('energetic')" class="mood-card premium-card rounded-2xl p-4 text-center"><span class="text-4xl block mb-2">⚡</span><span class="font-semibold text-gray-700">Energetic</span></button>
+                        </div>
+                        <div id="mood-suggestions" class="hidden">
+                            <h3 class="font-bold text-lg text-gray-900 mb-4">🍽️ Nutrition Suggestions for <span id="mood-selected-name">your mood</span></h3>
+                            <div id="mood-food-list" class="grid md:grid-cols-3 gap-4"></div>
+                        </div>
+                    </div>
+                    <!-- Diet Plan Section -->
+                    <div id="diet-section" class="section-hidden premium-card rounded-3xl p-6 mb-6 animate-slide">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-display text-2xl font-bold text-gray-900">🍽️ Personalized Diet Plan</h2><button onclick="event.preventDefault(); closeDashSection('diet-section')" class="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 mb-6">
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2">Health Focus</label><select id="diet-health" class="input-3d w-full px-4 py-3 rounded-xl"><option value="general">General Wellness</option><option value="diabetes">Diabetes Management</option><option value="heart">Heart Health</option><option value="weight-loss">Weight Loss</option><option value="muscle-gain">Muscle Gain</option><option value="digestion">Digestive Health</option></select>
+                            </div>
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2">Budget</label><select id="diet-budget" class="input-3d w-full px-4 py-3 rounded-xl"><option value="low">Budget Friendly</option><option value="medium">Moderate</option><option value="high">Premium</option></select>
+                            </div>
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2">Week Type</label><select id="diet-week" class="input-3d w-full px-4 py-3 rounded-xl"><option value="normal">Normal Week</option><option value="exam">Exam Week</option><option value="fitness">Fitness Week</option><option value="detox">Detox Week</option></select>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div><label class="block text-sm font-semibold text-gray-700 mb-2">Cultural Preference</label><select id="diet-culture" class="input-3d w-full px-4 py-3 rounded-xl"><option value="indian">Indian</option><option value="mediterranean">Mediterranean</option><option value="asian">Asian</option><option value="western">Western</option></select>
+                            </div>
+                            <div class="flex items-end"><button type="button" onclick="generateDietPlan()" class="btn-3d w-full py-3 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold rounded-xl">Generate Diet Plan</button>
+                            </div>
+                        </div>
+                        <div id="diet-plan-result" class="hidden">
+                            <h3 class="font-bold text-lg text-gray-900 mb-4">📋 Your Personalized Diet Plan</h3>
+                            <div id="diet-meals" class="space-y-4"></div>
+                        </div>
+                    </div>
+                    <!-- Health Tracking -->
+                    <div class="premium-card rounded-3xl p-6 mb-6">
+                        <h2 class="font-display text-2xl font-bold text-gray-900 mb-6">📊 Health Tracking</h2>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div class="bg-gradient-to-br from-violet-100 to-violet-50 rounded-2xl p-4 text-center">
+                                <span class="text-3xl block mb-2">💧</span>
+
+                                <p id="water-count" class="text-2xl font-bold text-violet-700">0</p>
+                                <p class="text-sm text-violet-600">Glasses of Water</p>
+
+                                <div class="mt-2 flex justify-center gap-2">
+                                    <button onclick="decrementWater()" class="px-3 py-1 bg-gray-400 text-white rounded-full">-</button>
+                                    <button onclick="incrementWater()" class="px-3 py-1 bg-violet-500 text-white rounded-full">+</button>
+                                </div>
+
+                            </div>
+                            <div class="bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-2xl p-4 text-center">
+                                <span class="text-3xl block mb-2">🚶</span>
+
+                                <p id="steps-count" class="text-2xl font-bold text-cyan-700">0</p>
+                                <p class="text-sm text-cyan-600">Steps Today</p>
+
+                                <div class="mt-2 flex justify-center gap-2">
+                                    <button onclick="removeSteps()" class="px-3 py-1 bg-gray-400 text-white rounded-full">-</button>
+                                    <button onclick="addSteps()" class="px-3 py-1 bg-cyan-500 text-white rounded-full">+1000</button>
+                                </div>
+
+                            </div>
+                            <div class="bg-gradient-to-br from-fuchsia-100 to-fuchsia-50 rounded-2xl p-4 text-center">
+                                <span class="text-3xl block mb-2">🍎</span>
+
+                                <p id="calories-count" class="text-2xl font-bold text-fuchsia-700">0</p>
+                                <p class="text-sm text-fuchsia-600">Calories Logged</p>
+
+                                <div class="mt-2 flex justify-center gap-2">
+                                    <button onclick="removeCalories()" class="px-3 py-1 bg-gray-400 text-white rounded-full">-</button>
+                                    <button onclick="addCalories()" class="px-3 py-1 bg-fuchsia-500 text-white rounded-full">+100</button>
+                                </div>
+
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl p-4 text-center">
+                                <span class="text-3xl block mb-2">😴</span>
+
+                                <p id="sleep-count" class="text-2xl font-bold text-emerald-700">0</p>
+                                <p class="text-sm text-emerald-600">Hours Sleep</p>
+
+                                <div class="mt-2 flex justify-center gap-2">
+                                    <button onclick="removeSleep()" class="px-3 py-1 bg-gray-400 text-white rounded-full">-</button>
+                                    <button onclick="addSleep()" class="px-3 py-1 bg-emerald-500 text-white rounded-full">+1hr</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gamification -->
+                    <div class="premium-card rounded-3xl p-6">
+                        <h2 class="font-display text-2xl font-bold text-gray-900 mb-6">🎮 Your Achievements</h2>
+                        <div class="grid md:grid-cols-5 gap-4">
+                            <div id="badge-quiz" class="rounded-2xl p-4 text-center bg-gray-100 opacity-50"><span class="text-4xl block mb-2">🏆</span>
+                                <p class="text-sm font-semibold text-gray-600">Quiz Master</p>
+                            </div>
+                            <div id="badge-water" class="rounded-2xl p-4 text-center bg-gray-100 opacity-50"><span class="text-4xl block mb-2">💧</span>
+                                <p class="text-sm font-semibold text-gray-600">Hydration Hero</p>
+                            </div>
+                            <div id="badge-steps" class="rounded-2xl p-4 text-center bg-gray-100 opacity-50"><span class="text-4xl block mb-2">🚀</span>
+                                <p class="text-sm font-semibold text-gray-600">Step Champion</p>
+                            </div>
+                            <div id="badge-streak" class="rounded-2xl p-4 text-center bg-gray-100 opacity-50"><span class="text-4xl block mb-2">🔥</span>
+                                <p class="text-sm font-semibold text-gray-600">7 Day Streak</p>
+                            </div>
+                            <div id="badge-explorer" class="rounded-2xl p-4 text-center bg-gray-100 opacity-50"><span class="text-4xl block mb-2">📚</span>
+                                <p class="text-sm font-semibold text-gray-600">Knowledge Seeker</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Knowledge Hub -->
+        <section id="knowledge-hub" class="section-hidden min-h-full w-full px-6 py-12">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 animate-slide">
+                    <h2 class="font-display text-4xl font-bold text-gray-900 mb-4">📚 Knowledge Hub</h2>
+                    <p class="text-xl text-gray-600">Explore science-backed nutrition insights</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <article class="premium-card rounded-2xl overflow-hidden animate-slide" style="animation-delay: 0.1s">
+                        <div class="h-40 bg-gradient-to-br from-violet-500 to-violet-600 flex items-center justify-center"><span class="text-6xl">🥗</span>
+                        </div>
+                        <div class="p-6"><span class="text-xs font-semibold text-violet-600 uppercase">Nutrition</span>
+                            <h3 class="font-bold text-lg text-gray-900 mt-2 mb-3">The Science of Balanced Eating</h3>
+                            <p class="text-gray-600 text-sm mb-4">Discover how macronutrients and micronutrients work together for optimal health.</p><button onclick="openArticle('balanced-eating')" class="text-violet-600 font-semibold text-sm hover:text-violet-700 cursor-pointer">Read More →</button>
+                        </div>
+                    </article>
+                    <article class="premium-card rounded-2xl overflow-hidden animate-slide" style="animation-delay: 0.2s">
+                        <div class="h-40 bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center"><span class="text-6xl">🧬</span>
+                        </div>
+                        <div class="p-6"><span class="text-xs font-semibold text-cyan-600 uppercase">Science</span>
+                            <h3 class="font-bold text-lg text-gray-900 mt-2 mb-3">Gut Microbiome &amp; Mental Health</h3>
+                            <p class="text-gray-600 text-sm mb-4">How your digestive system influences your mood and cognitive function.</p><button onclick="openArticle('gut-health')" class="text-cyan-600 font-semibold text-sm hover:text-cyan-700 cursor-pointer">Read More →</button>
+                        </div>
+                    </article>
+                    <article class="premium-card rounded-2xl overflow-hidden animate-slide" style="animation-delay: 0.3s">
+                        <div class="h-40 bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 flex items-center justify-center"><span class="text-6xl">🏋️</span>
+                        </div>
+                        <div class="p-6"><span class="text-xs font-semibold text-fuchsia-600 uppercase">Body</span>
+                            <h3 class="font-bold text-lg text-gray-900 mt-2 mb-3">Exercise &amp; Nutrient Absorption</h3>
+                            <p class="text-gray-600 text-sm mb-4">Learn how physical activity enhances your body's ability to use nutrients.</p><button onclick="openArticle('exercise-nutrients')" class="text-fuchsia-600 font-semibold text-sm hover:text-fuchsia-700 cursor-pointer">Read More →</button>
+                        </div>
+                    </article>
+                    <article class="premium-card rounded-2xl overflow-hidden animate-slide" style="animation-delay: 0.4s">
+                        <div class="h-40 bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center"><span class="text-6xl">🧠</span>
+                        </div>
+                        <div class="p-6"><span class="text-xs font-semibold text-amber-600 uppercase">Mind</span>
+                            <h3 class="font-bold text-lg text-gray-900 mt-2 mb-3">Brain Foods for Better Focus</h3>
+                            <p class="text-gray-600 text-sm mb-4">Optimize your cognitive performance with these scientifically proven foods.</p><button onclick="openArticle('brain-foods')" class="text-amber-600 font-semibold text-sm hover:text-amber-700 cursor-pointer">Read More →</button>
+                        </div>
+                    </article>
+                    <article class="premium-card rounded-2xl overflow-hidden animate-slide" style="animation-delay: 0.5s">
+                        <div class="h-40 bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center"><span class="text-6xl">🌿</span>
+                        </div>
+                        <div class="p-6"><span class="text-xs font-semibold text-emerald-600 uppercase">Ayurveda</span>
+                            <h3 class="font-bold text-lg text-gray-900 mt-2 mb-3">Ancient Wisdom, Modern Health</h3>
+                            <p class="text-gray-600 text-sm mb-4">Integrate traditional Ayurvedic principles into your daily nutrition routine.</p><button onclick="openArticle('ayurveda')" class="text-emerald-600 font-semibold text-sm hover:text-emerald-700 cursor-pointer">Read More →</button>
+                        </div>
+                    </article>
+                    <article class="premium-card rounded-2xl overflow-hidden animate-slide" style="animation-delay: 0.6s">
+                        <div class="h-40 bg-gradient-to-br from-rose-500 to-rose-600 flex items-center justify-center"><span class="text-6xl">❤️</span>
+                        </div>
+                        <div class="p-6"><span class="text-xs font-semibold text-rose-600 uppercase">Wellness</span>
+                            <h3 class="font-bold text-lg text-gray-900 mt-2 mb-3">Heart-Healthy Diet Patterns</h3>
+                            <p class="text-gray-600 text-sm mb-4">Dietary strategies to support cardiovascular health and longevity.</p><button onclick="openArticle('heart-health')" class="text-rose-600 font-semibold text-sm hover:text-rose-700 cursor-pointer">Read More →</button>
+                        </div>
+                    </article>
+                </div>
+                <div class="text-center mt-12"><button onclick="event.preventDefault(); showSection('landing-page')" class="px-6 py-3 text-violet-600 font-semibold hover:text-violet-700">← Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+
+
+    </div>
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
